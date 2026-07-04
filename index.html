@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FoodHub - Digital Restaurant Menu">
+    <title>FoodHub - Digital Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header sticky">
+        <div class="container">
+            <div class="header-top">
+                <h1 class="logo">🍽️ FoodHub</h1>
+                <input type="text" id="search" class="search-box" placeholder="Search items...">
+                <div class="cart-icon" id="cartIcon">
+                    <span class="icon">🛒</span>
+                    <span class="count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Welcome Banner -->
+    <section class="banner">
+        <div class="container">
+            <h2>Welcome to FoodHub</h2>
+            <p>Delicious food, delivered to your table</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+        <div class="container">
+            <div class="filter-group">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="burgers">🍔 Burgers</button>
+                <button class="filter-btn" data-category="pizza">🍕 Pizza</button>
+                <button class="filter-btn" data-category="chicken">🍗 Chicken</button>
+                <button class="filter-btn" data-category="noodles">🍜 Noodles</button>
+                <button class="filter-btn" data-category="rice">🍛 Rice</button>
+                <button class="filter-btn" data-category="drinks">🥤 Drinks</button>
+                <button class="filter-btn" data-category="dessert">🍰 Dessert</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Grid -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <span class="close-cart" id="closeCart">✕</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-message">Cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-price">
+                <strong>Total:</strong>
+                <span id="totalPrice">₹0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeModal">✕</span>
+            <h2>Your Details</h2>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input type="tel" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Table Number</label>
+                    <input type="text" id="tableNumber">
+                </div>
+                <div class="form-group">
+                    <label>Special Notes</label>
+                    <textarea id="specialNotes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Generate Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Summary Modal -->
+    <div class="modal" id="summaryModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeSummary">✕</span>
+            <h2>Order Summary</h2>
+            <div class="order-summary" id="orderSummary"></div>
+            <div class="action-buttons">
+                <button class="btn-action btn-whatsapp" id="whatsappBtn">📱 WhatsApp</button>
+                <button class="btn-action btn-copy" id="copyBtn">📋 Copy</button>
+                <button class="btn-action btn-print" id="printBtn">🖨️ Print</button>
+                <button class="btn-action btn-new" id="newOrderBtn">New Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Button -->
+    <button class="admin-btn" id="adminBtn">⚙️</button>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="panel-header">
+            <h3>Admin Panel</h3>
+            <span class="close-panel" id="closeAdmin">✕</span>
+        </div>
+        <div class="panel-tabs">
+            <button class="tab-btn active" data-tab="restaurant">Restaurant</button>
+            <button class="tab-btn" data-tab="add">Add Item</button>
+            <button class="tab-btn" data-tab="manage">Manage</button>
+        </div>
+
+        <!-- Restaurant Tab -->
+        <div class="tab-content active" id="restaurant-tab">
+            <h4>Restaurant Info</h4>
+            <div class="form-group">
+                <label>Restaurant Name</label>
+                <input type="text" id="restName" value="FoodHub">
+            </div>
+            <div class="form-group">
+                <label>Welcome Message</label>
+                <textarea id="restMessage">Delicious food, delivered to your table</textarea>
+            </div>
+            <button class="btn-save" id="saveRestaurant">Save</button>
+        </div>
+
+        <!-- Add Item Tab -->
+        <div class="tab-content" id="add-tab">
+            <h4>Add Menu Item</h4>
+            <div class="form-group">
+                <label>Item Name *</label>
+                <input type="text" id="itemName" placeholder="e.g., Chicken Burger">
+            </div>
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="itemDesc" placeholder="Short description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Price (₹) *</label>
+                <input type="number" id="itemPrice" placeholder="250">
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="itemCategory">
+                    <option>Select</option>
+                    <option value="burgers">Burgers</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="chicken">Chicken</option>
+                    <option value="noodles">Noodles</option>
+                    <option value="rice">Rice</option>
+                    <option value="drinks">Drinks</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <select id="itemType">
+                    <option value="veg">Veg</option>
+                    <option value="nonveg">Non-Veg</option>
+                </select>
+            </div>
+            <button class="btn-save" id="addItemBtn">Add Item</button>
+        </div>
+
+        <!-- Manage Tab -->
+        <div class="tab-content" id="manage-tab">
+            <h4>Manage Items</h4>
+            <div id="manageList"></div>
+        </div>
+    </div>
+
+    <!-- QR Button -->
+    <button class="qr-btn" id="qrBtn">📲 QR Code</button>
+
+    <!-- QR Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeQR">✕</span>
+            <h2>Menu QR Code</h2>
+            <div id="qrCode" style="text-align: center;"></div>
+            <p style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;" id="qrUrl"></p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
