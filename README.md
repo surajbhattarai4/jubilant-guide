@@ -251,8 +251,8 @@ MIT License - see LICENSE file for details
 
 ## 📞 Support
 
-- Email: support@qrmenu.com
-- Phone: +977-1-XXXXXXX
+- Email: surajxc123@gmail.
+- Phone: +08064607546
 - Website: www.qrmenu.com
 - Documentation: https://docs.qrmenu.com
 
